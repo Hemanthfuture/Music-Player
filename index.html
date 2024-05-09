@@ -1,0 +1,81 @@
+<html>
+  <head>
+    <title>Music Player</title>
+    <link href="style.css" rel="stylesheet" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Lemon&display=swap"
+      rel="stylesheet"
+    />
+    <script
+      src="https://kit.fontawesome.com/81e8444860.js"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+  <body>
+    <div class="container">
+      <div class="musicPlayer">
+        <div class="icons">
+          <div class="icon" id="iconone"><i class="fa-solid fa-angle-left"></i></div>
+          <div class="icon" id="icontwo"><i class="fa-solid fa-bars"></i></div>
+        </div>
+        <h1>Music Player</h1>
+        <img src="hollywood singer.jpg" alt="image is loading " />
+        <h3>Shape Of You</h3>
+        <p>Ed Sheeran</p>
+        <audio  id="song">
+          <source src="Shape-Of-You(PagalWorlld.Com).mp3" />
+        </audio>
+        <input type="range"  id="rangebar" >
+        <div class="controls">
+          <div class="control" id="backward"><i class="fa-solid fa-backward"></i></div>
+          <div class="control" id="centre" onclick="playPause()"><i class="fa-solid fa-play" id="cent"></i></div>
+          <div class="control" id="forward"><i class="fa-solid fa-forward"></i></div>
+        </div>
+      </div>
+      <button id="btn" onclick="change()">😉</button>
+    </div>
+
+    <script>
+      let rangebarEl = document.getElementById("rangebar");
+      let songEl=document.getElementById("song");
+      let cent = document.getElementById("cent");
+      songEl.onloadedmetadata=function(){
+        rangebarEl.max=songEl.duration;
+        rangebarEl.value=songEl.currentTime;
+      }
+
+      function playPause(){
+        if(cent.classList.contains("fa-play")){
+          songEl.play();
+          cent.classList.remove("fa-play");
+          cent.classList.add("fa-pause");
+        }else{
+          songEl.pause();
+          cent.classList.remove("fa-pause");
+          cent.classList.add("fa-play");
+        }
+        
+      }
+      
+      if(songEl.play()){
+
+        setInterval(() => {
+          rangebarEl.value=songEl.currentTime;
+        }, 500);
+      }
+      rangebarEl.onchange=function(){
+        songEl.play();
+        songEl.currentTime=rangebarEl.value;
+        cent.classList.remove("fa-play");
+        cent.classList.add("fa-pause");
+      }
+      let cont=document.querySelector(".container");
+      function change(){
+        cont.style.backgroundImage='url("music background image.jpg")';
+      }
+
+    </script>
+  </body>
+</html>
